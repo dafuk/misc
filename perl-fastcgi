@@ -1,0 +1,42 @@
+#!/bin/bash
+BIND=127.0.0.1:9391
+USER=www-data
+PERL_FCGI_CHILDREN=15
+PERL_FCGI_MAX_REQUESTS=1000
+
+PERL_CGI=/usr/bin/perl
+PERL_CGI_NAME=`basename $PERL_CGI`
+PERL_CGI_ARGS="- USER=$USER PATH=/usr/bin PERL_FCGI_CHILDREN=$PERL_FCGI_CHILDREN PERL_FCGI_MAX_REQUESTS=$PERL_FCGI_MAX_REQUESTS $PERL_CGI -b $BIND"
+RETVAL=0
+
+start() {
+      echo -n "Starting Perl FastCGI: "
+      start-stop-daemon --quiet --start --background --chuid "$USER" --exec /usr/bin/env 
+      RETVAL=$?
+      echo "$PERL_CGI_NAME."
+}
+stop() {
+      echo -n "Stopping PERL FastCGI: "
+      killall -q -w -u $USER $PERL_CGI
+      RETVAL=$?
+      echo "$PERL_CGI_NAME."
+}
+
+case "$1" in
+    start)
+      start
+  ;;
+    stop)
+      stop
+  ;;
+    restart)
+      stop
+      start
+  ;;
+    *)
+      echo "Usage: perl-fastcgi {start|stop|restart}"
+      exit 1
+  ;;
+esac
+exit $RETVAL
+
