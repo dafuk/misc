@@ -1,9 +1,9 @@
 #!/bin/sh
 # some config
-installer_path = "/opt/install"
+installer_path="/opt/install"
 echo "Prepare yourself! Redis is coming in... Deps first..."
-apt-get update
-apt-get install build-essential libtolua-dev libjemalloc-dev tcl mc 
+apt-get update 
+apt-get install build-essential libtolua-dev libjemalloc-dev tcl mc -y
 if [ !-d $installer_path ]
 then mkdir $installer_path
 fi
