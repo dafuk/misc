@@ -18,7 +18,7 @@ sub callredis
 	my $cmd = shift; # why sanitize if you should only use it yourself?
 	if ('quit' eq lc($cmd)) {return fclose($this->{'conn'});}
 	$return = print $this->{'conn'}, redistd::_multi_bulk_answer($cmd) ;
-	if ($return eq false) {	die('shit'); }
+	if ($return eq false) {	die('foo'); }
 	$answer = redistd::_answer($this->{'conn'});
 
 	if ('hgetall' eq substr(lc($cmd), 0, 7))

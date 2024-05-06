@@ -22,9 +22,9 @@ class mem
 	}
 
 
-	$this->make_this_shit_work(); 
+	$this->make_this_foo_work(); 
     }
-    function make_this_shit_work()
+    function make_this_foo_work()
     {
 	$memcache = new Memcache; //
 	$memcache->connect($this->memhost, $this->memport); // ever considered flexible configuration?
@@ -38,7 +38,7 @@ class mem
     {
 	if(!is_object($this->ram)) 
         {
-	    $this->make_this_shit_work(); 
+	    $this->make_this_foo_work(); 
 	}
 	if($key != 'count')
 	{
@@ -53,7 +53,7 @@ class mem
     {
 	if(!is_object($this->ram)) 
         {
-	    $this->make_this_shit_work(); 
+	    $this->make_this_foo_work(); 
 	    return 0;
 	}
 	return $this->ram->get($key);
